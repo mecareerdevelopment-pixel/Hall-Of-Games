@@ -1,0 +1,30 @@
+﻿@model Game
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="card border-secondary mt-4 rounded-4 overflow-hidden">
+    <div class="card-body p-0">
+        <div class="row">
+            <div class="col-md-8 p-5 d-flex flex-column justify-content-between">
+                <div>
+                    <h1 class="text-light fw-bolder fst-italic">@Model.Name</h1>
+                    <span class="mb-5 badge rounded-pill bg-secondary fs-6">@Model.Category.Name</span>
+                    <p >@Model.Description</p>
+
+                </div>
+                <div class="align-content-end">
+                    @foreach(var compatability in Model.CompatibleDevices)
+                    {
+                        <i class="@compatability.Device.Icon fs-1 me-5 text-primary"></i>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img src="@Url.Content($"~{ViewData["GameCoverImagesPath"]}/{Model.Cover}")" class=" rounded-4 w-100" />
+            </div>
+        </div>
+    </div>
+</div>

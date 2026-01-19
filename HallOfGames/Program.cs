@@ -1,3 +1,5 @@
+using HallOfGames.Services;
+
 namespace HallOfGames
 {
     public class Program
@@ -14,6 +16,11 @@ namespace HallOfGames
 
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+            builder.Services.AddScoped<ICategoriesService, CategoriesService>();
+            builder.Services.AddScoped<IDevicesService, DevicesService>();
+            builder.Services.AddScoped<IGamesService, GamesService>();
+
 
             var app = builder.Build();
 
@@ -33,7 +40,7 @@ namespace HallOfGames
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Home}/{action=Index}/{gameId?}")
                 .WithStaticAssets();
 
             app.Run();

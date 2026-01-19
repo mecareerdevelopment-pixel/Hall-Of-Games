@@ -1,25 +1,25 @@
 using System.Diagnostics;
-using HallOfGames.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace HallOfGames.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IGamesService _gamesService;
+        private readonly IConfiguration _config;
+
+        public HomeController(IGamesService gamesService, IConfiguration config)
+        {
+            _gamesService = gamesService;
+            _config = config;
+        }
+
         public IActionResult Index()
         {
-            return View();
-        }
+            var games = _gamesService.GetAll();
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+            ViewData["GameCoverImagesPath"] = _config["GamesCoverImagesSavingPath"];
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(games);
         }
     }
 }

@@ -1,8 +1,43 @@
-﻿@{
+﻿@model IEnumerable<Game>
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@if(!Model.Any())
+{
+    <div class="alert alert-dismissible alert-warning">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        <h4 class="alert-heading">No Games has been found in Database</h4>
+        <p class="mb-0">When there are games, it will be listed here.</p>
+    </div>
+}
+else
+{
+    <div class="row mt-4">
+        @foreach (var game in Model)
+        {
+            <div class="col-lg-4 col-md-6 mb-5">
+                <a asp-area="" asp-controller="Games" asp-action="Details" asp-route-gameId="@game.Id" class="card border-success mb-3 rounded-4 overflow-hidden text-decoration-none">
+                    <div class="card-body" style="background-image: url(@Url.Content($"~{ViewData["GameCoverImagesPath"]}/{game.Cover}")); background-size: cover; background-position: center; height: 450px">
+                            <div class="h-100">
+                                <span class="badge rounded-pill bg-info fs-6">@game.Category.Name</span>
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                            <h4>@game.Name</h4>
+                            <div>
+                                @foreach (var compatabileDevice in game.CompatibleDevices)
+                                {
+                                    <span class="@compatabileDevice.Device.Icon me-2 fs-5"></span>
+                                }
+                            </div>
+                        
+                        </div>
+                </a>
+            </div>
+        }
+    </div>
+}

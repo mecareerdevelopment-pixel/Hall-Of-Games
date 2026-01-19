@@ -1,3 +1,9 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 global using HallOfGames.Data;
 global using HallOfGames.Models;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Microsoft.AspNetCore.Mvc;
+global using HallOfGames.Services;
+global using HallOfGames.CustomValidationAttributes;
+global using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+global using System.ComponentModel.DataAnnotations;

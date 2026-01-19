@@ -10,6 +10,6 @@
 
         public Category Category { get; set; } = default!;
 
-        public ICollection<GameDeviceCompatibility> CompatibleDevices { get; set; } = new List<GameDeviceCompatibility>();
+        public ICollection<GameDeviceCompatibility> CompatibleDevices { get; set; } = default!;
     }
 }
