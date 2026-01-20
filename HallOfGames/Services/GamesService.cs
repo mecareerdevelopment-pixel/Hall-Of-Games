@@ -8,7 +8,7 @@ namespace HallOfGames.Services
     {
         private readonly ApplicationDbContext _context;
         private readonly string _coverImagesFolderPath;
-        
+       
 
         public GamesService(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IConfiguration staticValues)
         {
@@ -103,8 +103,6 @@ namespace HallOfGames.Services
                 GameId = gameInDB.Id
             }).ToList();
 
-
-
             await _context.SaveChangesAsync();
 
             return gameInDB;
@@ -147,7 +145,10 @@ namespace HallOfGames.Services
 
 
 
-
+        public bool CheckIfGameNameIsUnique(string gameName, int gameId)
+        {
+            return _context.Games.SingleOrDefault(g => g.Name == gameName) == null || _context.Games.SingleOrDefault(g => g.Name == gameName).Id == gameId;
+        }
 
 
         /// <summary>

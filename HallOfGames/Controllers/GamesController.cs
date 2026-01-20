@@ -18,11 +18,11 @@ namespace HallOfGames.Controllers
             _staticValues = staticValues;
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromServices] IConfiguration _config)
         {
             var games = _gamesService.GetAll();
 
-            ViewData["GameCoverImagesPath"] = _staticValues["GamesCoverImagesSavingPath"];
+            ViewData["GameCoverImagesPath"] = _config["GamesCoverImagesSavingPath"];
 
             return View(games);
         }
@@ -36,8 +36,6 @@ namespace HallOfGames.Controllers
             {
                 return NotFound();
             }
-
-            ViewData["GameCoverImagesPath"] = _staticValues["GamesCoverImagesSavingPath"];
 
             return View(game);
         }
@@ -151,6 +149,13 @@ namespace HallOfGames.Controllers
 
             return isDeleted ? Ok("ok") : BadRequest();
             
+        }
+
+
+
+        public IActionResult ValidateGameName(string Name, int gameId)
+        {
+            return Json(((GamesService)_gamesService).CheckIfGameNameIsUnique(Name, gameId));
         }
     }
 }

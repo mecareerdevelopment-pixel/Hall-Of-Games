@@ -10,6 +10,8 @@
         [Required(ErrorMessage = "The Game Name Is Required.")]
         [MaxLength(200, ErrorMessage = "Max Allowed = 200 chars")]
         [MinLength(3, ErrorMessage = "Min Allowed = 3 chars")]
+        [Remote("ValidateGameName", "Games", ErrorMessage = "This game name is already exists in database!. Can not have duplicate games with the same name.", AdditionalFields = "gameId")]
+        [UniqueName]
         public string Name { get; set; } = default!;
 
 

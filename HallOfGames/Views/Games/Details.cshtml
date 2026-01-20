@@ -1,4 +1,5 @@
 ﻿@model Game
+@inject IConfiguration _config
 
 @{
     ViewData["Title"] = Model.Name;
@@ -23,7 +24,7 @@
             </div>
 
             <div class="col-md-4">
-                <img src="@Url.Content($"~{ViewData["GameCoverImagesPath"]}/{Model.Cover}")" class=" rounded-4 w-100" />
+                <img src="@Url.Content($"~{_config["GamesCoverImagesSavingPath"]}/{Model.Cover}")" class=" rounded-4 w-100" />
             </div>
         </div>
     </div>

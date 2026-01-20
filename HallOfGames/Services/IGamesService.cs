@@ -16,6 +16,8 @@ namespace HallOfGames.Services
 
         public bool Delete(int gameId);      // Delete
 
+        public bool CheckIfGameNameIsUnique(string gameName, int gameId);
+
 
 
     }

@@ -11,7 +11,7 @@
 
 
 <form asp-action="Edit" asp-controller="Games" asp-route-gameId="@Model.gameId" method="post" enctype="multipart/form-data">
-
+    <input name="gameId" value="@Model.gameId" hidden>
     <div class="row">
 
         <div class="col-md-6">
